@@ -98,6 +98,9 @@ class App (wx.App):
         Opens any files that were passed via argv[1:]. Returns
         whether anything was opened.
         """
+        if len(sys.argv) > 1 and sys.argv[1][:4] == '-psn':
+            del sys.argv[1]
+
         if len(sys.argv) is 1:
             return False
         
@@ -200,7 +203,7 @@ class App (wx.App):
 
     def getPath (self):
         """Returns the path to the executing script or application."""
-        scriptPath = os.path.realpath(sys.path[0])
+        scriptPath = os.path.realpath(os.path.dirname(sys.argv[0]))
         
         # OS X py2app'd apps will direct us right into the app bundle
         
